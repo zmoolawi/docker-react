@@ -1,0 +1,21 @@
+name: Test
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: docker build -t zahra/docker-react -f Dockerfile.dev .
+
+      - name: Run tests
+        run: docker run -e CI=true zahra/docker-react npm run test -- --coverage
