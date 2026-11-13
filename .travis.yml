@@ -1,12 +1,11 @@
+language: generic
 sudo: required
 
 services:
   - docker
 
 before_install:
-  - docker build -t zahra/docker-react -f dockerfile.dev .
+  - docker build -t zahra/docker-react -f Dockerfile.dev .
 
-scripts:
-  - docker run -e CI=rue zahra/docker-react npm run test -- --coverage
-
-
+script:
+  - docker run -e CI=true zahra/docker-react npm run test -- --coverage
